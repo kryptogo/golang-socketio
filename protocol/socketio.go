@@ -15,8 +15,8 @@ const (
 	ackMessage    = "43"
 
 	CloseMessage = "1"
-	PingMessage = "2"
-	PongMessage = "3"
+	PingMessage  = "2"
+	PongMessage  = "3"
 )
 
 var (
@@ -72,7 +72,13 @@ func Encode(msg *Message) (string, error) {
 		return "", err
 	}
 
-	return result + "[" + string(jsonMethod) + "," + msg.Args + "]", nil
+	var encoded string
+	if len(msg.Namespace) > 0 {
+		encoded = result + msg.Namespace + "," + "[" + string(jsonMethod) + "," + msg.Args + "]"
+	} else {
+		encoded = result + "[" + string(jsonMethod) + "," + msg.Args + "]"
+	}
+	return encoded, nil
 }
 
 func MustEncode(msg *Message) string {

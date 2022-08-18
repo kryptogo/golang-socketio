@@ -36,10 +36,10 @@ const (
 )
 
 type Message struct {
-	Type   int
-	AckId  int
-	Method string
-	Args   string
-	Source string
+	Type      int
+	AckId     int
+	Method    string
+	Args      string
+	Source    string
+	Namespace string
 }
-

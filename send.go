@@ -3,9 +3,10 @@ package gosocketio
 import (
 	"encoding/json"
 	"errors"
-	"github.com/graarh/golang-socketio/protocol"
 	"log"
 	"time"
+
+	"github.com/kryptogo/golang-socketio/protocol"
 )
 
 var (
@@ -52,8 +53,9 @@ Create packet based on given data and send it
 */
 func (c *Channel) Emit(method string, args interface{}) error {
 	msg := &protocol.Message{
-		Type:   protocol.MessageTypeEmit,
-		Method: method,
+		Type:      protocol.MessageTypeEmit,
+		Method:    method,
+		Namespace: c.Namespace,
 	}
 
 	return send(msg, c, args)
